@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_nursing" android:icon="@drawable/ic_action_nursing"
+            android:title="Nursing" />
+        <item android:id="@+id/nav_bottle" android:icon="@mipmap/baby_bottle_icon"
+            android:title="Bottle" />
+        <item android:id="@+id/nav_Diaper" android:icon="@mipmap/baby_diaper_icon"
+            android:title="Diaper" />
+        <item android:id="@+id/nav_sleep" android:icon="@drawable/ic_action_sleeping"
+            android:title="Sleep" />
+    </group>
+
+    <item android:title="Infomation">
+        <menu>
+            <item android:id="@+id/nav_baby" android:icon="@drawable/ic_action_baby"
+                android:title="Baby" />
+            <item android:id="@+id/nav_month" android:icon="@android:drawable/ic_menu_my_calendar"
+                android:title="This Month" />
+        </menu>
+    </item>
+
+</menu>

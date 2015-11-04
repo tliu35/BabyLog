@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">BabyLog</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="baby_image">baby</string>
+
+    <string name="Welcome">Welcome to BabyMemo!</string>
+    <string name="name_label">Baby Name</string>
+    <string name="birthday">Birthday</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="submit">Submit</string>
+
+    <string name="title_activity_baby_info">BabyInfoActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>

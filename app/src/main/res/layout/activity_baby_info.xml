@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f49af9ed"
+    android:weightSum="1"
+    android:id="@+id/baby_info_layout">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/welcome_textView"
+        android:text="@string/Welcome"
+        android:gravity="center_vertical|center_horizontal"
+        android:textStyle="bold"
+        android:layout_marginTop="30dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="77dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/name_label"
+            android:id="@+id/name_textView"
+            android:layout_gravity="bottom"
+            android:layout_weight="0.04"
+            android:gravity="center_horizontal" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/name_editText"
+            android:layout_gravity="bottom"
+            android:layout_marginRight="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="97dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/birthday"
+            android:id="@+id/birth_date_textView"
+            android:layout_gravity="bottom"
+            android:layout_weight="1.02"
+            android:gravity="center_horizontal" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:ems="10"
+            android:id="@+id/birthday_editText"
+            android:layout_gravity="bottom"
+            android:layout_marginRight="10dp"
+            android:autoText="false"
+            android:editable="true" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_weight="0.51">
+
+        <TextView
+            android:layout_width="102dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/gender"
+            android:id="@+id/gender_textView"
+            android:layout_gravity="bottom"
+            android:layout_weight="0.18"
+            android:gravity="center_horizontal" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/male"
+            android:id="@+id/male_radioButton"
+            android:layout_weight="0.18"
+            android:layout_gravity="bottom"
+            android:allowUndo="true" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/female"
+            android:id="@+id/female_radioButton"
+            android:layout_weight="0.18"
+            android:layout_gravity="bottom"
+            android:allowUndo="true" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit"
+        android:id="@+id/submit_button"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:onClick="gotoMainActivity"/>
+
+</LinearLayout>
