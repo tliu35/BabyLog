@@ -14,9 +14,15 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -50,17 +56,17 @@ public class BabyInfoActivity extends AppCompatActivity implements View.OnFocusC
 
     private EditText babyNameEditText;
     private EditText birthdayEditText;
-    private RadioButton maleButton;
-
-    private RadioButton femaleButton;
+    private RadioButton genderRadioButton;
+    private RadioGroup genderRadioGroup;
+    private int selectedID;
 
     protected String babyName;
     protected String babyGender;
-    protected Calendar babyBirthday;
+    protected String babyBirthday;
 
     private DatePickerDialog birthdayPicker;
 
-    private SimpleDateFormat dateFormat;
+    private Baby baby;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +74,6 @@ public class BabyInfoActivity extends AppCompatActivity implements View.OnFocusC
 
         setContentView(R.layout.activity_baby_info);
 
-        dateFormat = new SimpleDateFormat("dd-mm-yyyy", Locale.US);
 //        Calendar date = Calendar.getInstance();
 //        int day = date.get(Calendar.DAY_OF_MONTH);
 //        int month = date.get(Calendar.MONTH);
@@ -80,13 +85,8 @@ public class BabyInfoActivity extends AppCompatActivity implements View.OnFocusC
         //register the views
         babyNameEditText = (EditText) findViewById(R.id.name_editText);
         birthdayEditText = (EditText) findViewById(R.id.birthday_editText);
-        maleButton = (RadioButton) findViewById(R.id.male_radioButton);
-        femaleButton = (RadioButton) findViewById(R.id.female_radioButton);
 
-
-        //get the baby name
-        babyName = babyNameEditText.getText().toString();
-        //babyBirthday = birthdayEditText.getText();
+        genderRadioGroup = (RadioGroup)findViewById(R.id.genderGroup);
 
         setDate();
 
@@ -98,10 +98,11 @@ public class BabyInfoActivity extends AppCompatActivity implements View.OnFocusC
             }
         });
 
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-        //findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+        //TODO:
+        // Every time start this activity Read the file, if the file is empty,
+
+        File f  = getFilesDir();
+        String path = f.getAbsolutePath();
     }
 
     @Override
@@ -210,8 +211,57 @@ public class BabyInfoActivity extends AppCompatActivity implements View.OnFocusC
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
 
+    /*
+    TODO: check if the input is empty. if yes, then show a error message
+     */
+    private void getBabyInfo(){
+        //get the baby name
+        babyName = babyNameEditText.getText().toString();
+        babyBirthday = birthdayEditText.getText().toString();
+        //get the gender info
+        selectedID = genderRadioGroup.getCheckedRadioButtonId();
+        genderRadioButton = (RadioButton)findViewById(selectedID);
+        babyGender = genderRadioButton.getText().toString();
+
+    }
+
+    private void setBabyInfo(){
+
+        babyNameEditText.setText(babyName);
+        birthdayEditText.setText(babyBirthday);
+        genderRadioGroup.check(selectedID);
+    }
+
+    private void createBabyFile() throws IOException {
+        String babyInfo = "Name:"+babyName+";Gender:"+babyGender+";Birthday:"+babyBirthday;
+        FileOutputStream fos = openFileOutput("babyfile.txt", MODE_PRIVATE);
+        fos.write(babyInfo.getBytes());
+        fos.close();
+    }
+    private void readBabyFile() throws IOException {
+        FileInputStream fis = openFileInput("myfile.txt");
+        BufferedInputStream bis = new BufferedInputStream(fis);
+        StringBuffer b = new StringBuffer();
+        while(bis.available() != 0){
+            char c = (char) bis.read();
+            b.append(c);
+        }
+        bis.close();
+        fis.close();
+    }
+
     // called when user click on submit
     public void gotoMainActivity(View view){
+        getBabyInfo();
+
+        baby = new Baby(babyName,babyGender,babyBirthday);
+
+        // TODO:
+        // maybe I should create a baby class list then pass to the mainacitivity
+        // but I am not sure it will be there the next time run the app
+        // Maybe I should just create a txt file and store the info in there and retrieve it every time
+
+        Toast.makeText(this,"Baby added"+ babyName+", "+ babyGender +"; "+babyBirthday, Toast.LENGTH_LONG).show();
             finish();
 //        Intent intent = new Intent(this, MainActivity.class);
 //        startActivity(intent);

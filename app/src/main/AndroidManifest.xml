@@ -24,6 +24,11 @@
             android:label="@string/title_activity_baby_info"
             android:theme="@style/FullscreenTheme" >
         </activity>
+        <activity
+            android:name=".MilestonesActivity"
+            android:label="@string/title_activity_milestones"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>

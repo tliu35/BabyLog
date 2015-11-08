@@ -17,7 +17,7 @@
             <item android:id="@+id/nav_baby" android:icon="@drawable/ic_action_baby"
                 android:title="Baby" />
             <item android:id="@+id/nav_month" android:icon="@android:drawable/ic_menu_my_calendar"
-                android:title="This Month" />
+                android:title="Milestones" />
         </menu>
     </item>
 
