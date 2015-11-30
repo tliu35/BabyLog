@@ -14,7 +14,8 @@
         android:text="@string/Welcome"
         android:gravity="center_vertical|center_horizontal"
         android:textStyle="bold"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="30dp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -83,27 +84,39 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/gender"
             android:id="@+id/gender_textView"
-            android:layout_gravity="bottom"
+            android:layout_gravity="center_vertical"
             android:layout_weight="0.18"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="30dp" />
 
-        <RadioButton
+        <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/male"
-            android:id="@+id/male_radioButton"
             android:layout_weight="0.18"
-            android:layout_gravity="bottom"
-            android:allowUndo="true" />
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="60dp">
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/female"
-            android:id="@+id/female_radioButton"
-            android:layout_weight="0.18"
-            android:layout_gravity="bottom"
-            android:allowUndo="true" />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/male"
+                android:id="@+id/male_radioButton"
+                android:layout_weight="0.18"
+                android:layout_gravity="bottom"
+                android:allowUndo="true" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/female"
+                android:id="@+id/female_radioButton"
+                android:layout_weight="0.18"
+                android:layout_gravity="bottom"
+                android:allowUndo="true" />
+
+        </RadioGroup>
+
+
 
     </LinearLayout>
 
