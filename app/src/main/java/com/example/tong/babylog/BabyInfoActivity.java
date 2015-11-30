@@ -2,13 +2,10 @@ package com.example.tong.babylog;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
-import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.DatePicker;
@@ -17,16 +14,16 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.logging.SimpleFormatter;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -232,14 +229,42 @@ public class BabyInfoActivity extends AppCompatActivity implements View.OnFocusC
         genderRadioGroup.check(selectedID);
     }
 
-    private void createBabyFile() throws IOException {
-        String babyInfo = "Name:"+babyName+";Gender:"+babyGender+";Birthday:"+babyBirthday;
-        FileOutputStream fos = openFileOutput("babyfile.txt", MODE_PRIVATE);
-        fos.write(babyInfo.getBytes());
-        fos.close();
+    public String jSONString (){
+        try{
+            JSONArray babyArray =  new JSONArray();
+
+            JSONObject babyJson = new JSONObject();
+
+            babyJson.put("name", babyName);
+            babyJson.put("birthday", babyBirthday);
+            babyJson.put("gender", babyGender);
+
+            babyArray.put(babyJson);
+            return babyArray.toString();
+
+        }catch (JSONException e){
+            e.printStackTrace();
+            Toast.makeText(this,"JSON ERROR in babyinfoactivity", Toast.LENGTH_LONG).show();
+        }
+        Toast.makeText(this, "will return null", Toast.LENGTH_LONG).show();
+        return null;
     }
-    private void readBabyFile() throws IOException {
-        FileInputStream fis = openFileInput("myfile.txt");
+
+    public void storeBabyFile() throws IOException {
+        String jsonString = jSONString();
+
+        Toast.makeText(this,"jsonString is "+jsonString, Toast.LENGTH_LONG).show();
+
+        FileOutputStream fos = openFileOutput("babyInfo", MODE_PRIVATE);
+        fos.write(jsonString.getBytes());
+        fos.close();
+        Toast.makeText(this,"Baby added"+ babyName+", "+ babyGender +"; "+babyBirthday, Toast.LENGTH_LONG).show();
+    }
+
+
+
+    private void readBabyFile() throws IOException, JSONException {
+        FileInputStream fis = openFileInput("babyInfo");
         BufferedInputStream bis = new BufferedInputStream(fis);
         StringBuffer b = new StringBuffer();
         while(bis.available() != 0){
@@ -248,23 +273,23 @@ public class BabyInfoActivity extends AppCompatActivity implements View.OnFocusC
         }
         bis.close();
         fis.close();
+
+        JSONObject data = new JSONObject(b.toString());
+        StringBuffer babyBuffer = new StringBuffer();
+
+
     }
 
     // called when user click on submit
-    public void gotoMainActivity(View view){
+    public void gotoMainActivity(View view) throws IOException {
         getBabyInfo();
 
-        baby = new Baby(babyName,babyGender,babyBirthday);
+        //baby = new Baby(babyName,babyGender,babyBirthday);
 
-        // TODO:
-        // maybe I should create a baby class list then pass to the mainacitivity
-        // but I am not sure it will be there the next time run the app
-        // Maybe I should just create a txt file and store the info in there and retrieve it every time
+        storeBabyFile();
 
-        Toast.makeText(this,"Baby added"+ babyName+", "+ babyGender +"; "+babyBirthday, Toast.LENGTH_LONG).show();
             finish();
-//        Intent intent = new Intent(this, MainActivity.class);
-//        startActivity(intent);
+
     }
 
     private void setDate(){
@@ -296,4 +321,6 @@ public class BabyInfoActivity extends AppCompatActivity implements View.OnFocusC
         if(v == birthdayEditText)
             birthdayPicker.show();
     }
+
+
 }

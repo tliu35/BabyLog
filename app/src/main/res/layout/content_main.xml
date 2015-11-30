@@ -9,24 +9,86 @@
     android:weightSum="1"
     android:gravity="top|center_vertical">
 
-    <TextView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/babyInfo_textView"
-        android:layout_weight="0.04" />
+        android:layout_height="54dp"></FrameLayout>
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView3"
-        android:layout_gravity="center" />
+        android:layout_height="116dp">
 
-    <TextView
+        <TextView
+            android:layout_width="213dp"
+            android:layout_height="wrap_content"
+            android:text="@string/name_label"
+            android:id="@+id/nameLabel_textView"
+            android:textSize="26dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/age_label"
+            android:id="@+id/ageLabel_TextView"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/nameLabel_textView"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textSize="26dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/nameTextView_MainContent"
+            android:layout_below="@+id/nameLabel_textView"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/ageLabel_TextView"
+            android:layout_toStartOf="@+id/ageLabel_TextView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/ageTextView_MainContent"
+            android:layout_below="@+id/nameLabel_textView"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/ageLabel_TextView"
+            android:layout_alignEnd="@+id/ageLabel_TextView"
+            android:layout_toRightOf="@+id/nameLabel_textView"
+            android:layout_toEndOf="@+id/nameLabel_textView" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView4"
-        android:layout_gravity="center" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Daiper Info"
+            android:id="@+id/daiper_textView"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nursing"
+            android:id="@+id/nursing_textView" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bottle"
+            android:id="@+id/bottle_textView" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sleep"
+            android:id="@+id/sleep_textView" />
+    </LinearLayout>
+
 </LinearLayout>
